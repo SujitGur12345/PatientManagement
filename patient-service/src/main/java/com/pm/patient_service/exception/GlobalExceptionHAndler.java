@@ -38,6 +38,17 @@ ex.getBindingResult().getFieldErrors().forEach(error ->
         errorsmessage.put("Message","Email already exist");
         return ResponseEntity.badRequest().body(errorsmessage);
     }
+
+    //PatientNotFound
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handlePatientNotFoundException(PatientNotFoundException ex){
+
+        log.warn("Patient not found {} " , ex.getMessage());
+
+        Map<String,String> errorsmessage = new HashMap<>();
+        errorsmessage.put("Message","Patient not found");
+        return ResponseEntity.badRequest().body(errorsmessage);
+    }
 }
 
 
